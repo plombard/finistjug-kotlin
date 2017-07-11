@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section>
+                <h1>Kotlin</h1>
+                <h3>(prononcez "Cotteline")</h3>
+                <p>
+                    <small>Kotlin + Java -> Java, par Pascal Lombard / <a href="http://twitter.com/plombard_00">@plombard_00</a></small>
+                </p>
+            </section>
+
+            <section>
+                <section>
+                    <h4>Pascal Lombard</h4>
+                    <h4>Développeur de logiciels au Crédit Mutuel Arkéa</h4>
+                    <h4>Java, Back, Industrialisation, Cloud Privé</h4>
+                    <h4>Developer Advocate Wannabe</h4>
+                </section>
+                <section>
+                    <p class="fragment">16 ans de métier</p>
+                    <p class="fragment">10 ans d'expérience Java</p>
+                    <p class="fragment">2h d'expérience Kotlin</p>
+                    <p class="fragment">... Tu te paies pas un peu not' tête, mignon ?</p>
+                </section>
+                <section>
+                    <p class="fragment">PAS DU TOUT</p>
+                    <p class="fragment">... Kotlin est JUSTEMENT pensé ainsi !</p>
+                </section>
+                <section>
+                    <h4>Sorti en 2011 par JetBrains (IntelliJ)</h4>
+                    <h4>Objectif, interne avant tout : Expressivité + EXXXTREME INTEROPERABILITÉ</h4>
+                    <h4>Objectif 2 : Visibilité + vendre de l'IntelliJ à fond</h4>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h4>Concepts</h4>
+                </section>
+                <section>
+                    <h4>Concepts</h4>
+                    <p>Pas de point-vigule</p>
+                    <p>Plus d'obligation 1 Fichier -> 1 classe</p>
+                    <p>Beaucoup d'implicite devient optionnel</p>
+                </section>
+                <section>
+                    <h4>Concepts</h4>
+                    <p>Visibilité publique par défaut</p>
+                    <p>Immutabilité par défaut</p>
+                    <p>Non-Nullité par défaut</p>
+                </section>
+                <section>
+                    <h4>Fonctions</h4>
+                    <pre>
+                    <code data-trim data-noescape>
+            fun double(x: Int): Int {
+    return 2*x
+}
+
+fun double(x: Int) = 2*x
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h4>val(ue)/var(iable)</h4>
+                    <pre>
+                    <code data-trim data-noescape>
+            val a: Int = 1  // immediate assignment
+val b = 2   // `Int` type is inferred
+val c: Int  // Type required when no initializer is provided
+c = 3       // deferred assignment
+
+var x = 5 // `Int` type is inferred
+x += 1
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h4>Default Values</h4>
+                    <pre>
+                    <code data-trim data-noescape>
+            fun foo(a: Int = 0, b: String = "") { ... }
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h4>Constructeurs</h4>
+                    <pre>
+                    <code data-trim data-noescape>
+            class Person constructor(val firstName: String, val lastName: String, var age: Int) {
+    // ...
+}
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h4>When</h4>
+                    <pre>
+                    <code data-trim data-noescape>
+            fun describe(obj: Any): String =
+when (obj) {
+    1          -> "One"
+    "Hello"    -> "Greeting"
+    is Long    -> "Long"
+    !is String -> "Not a string"
+    else       -> "Unknown"
+}
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h4>String templates/interpolation</h4>
+                    <pre>
+                    <code data-trim data-noescape>
+            val s = "abc"
+val str = "$s.length is ${s.length}" // evaluates to "abc.length is 3"
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h4>If not null</h4>
+                    <pre>
+                    <code data-trim data-noescape>
+            val files = File("Test").listFiles()
+
+println(files?.size)
+                    </code>
+                </pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Exemple : Bottoms Up !</h2>
+                </section>
+                <section>
+                    <h2>Présentation de l'appli</h2>
+                    <p class="fragment">Gestion des tournées de bière</p>
+                    <p class="fragment">Deux types de profils</p>
+                    <p class="fragment">Qui a bu quoi et qui a payé</p>
+                </section>
+                <section>
+                    <h2>Architecture de l'appli</h2>
+                    <p class="fragment">Java EE (JAX-RS)</p>
+                    <p class="fragment">Catalogue de bières 3rd party</p>
+                    <p class="fragment">3-tiers (Vue/Business/Dao)</p>
+                </section>
+                <section>
+                    <h2>Step-0 : Mise en place</h2>
+                </section>
+                <section>
+                    <h2>Step-1 : Singleton</h2>
+                </section>
+                <section>
+                    <h2>Step-2 : Mapper</h2>
+                </section>
+                <section>
+                    <h2>Step-3 : Utils</h2>
+                </section>
+                <section>
+                    <h2>Step-4 : Dataclass</h2>
+                </section>
+                <section>
+                    <h2>Step-5 : Builder</h2>
+                </section>
+                <section>
+                    <h2>Step-4 : Strategy</h2>
+                </section>
+            </section>
+        </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            history: true,
+
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [
+                { src: 'plugin/markdown/marked.js' },
+                { src: 'plugin/markdown/markdown.js' },
+                { src: 'plugin/notes/notes.js', async: true },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+            ]
+        });
+    </script>
+</body>
+
+</html>
